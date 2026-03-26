@@ -1,14 +1,12 @@
 const express = require("express");
 const admin = require("firebase-admin");
-const serviceAccount = require("./serviceAccountKey.json");
+const serviceAccount = JSON.parse(process.env.SERVICE_ACCOUNT_KEY);
 
 const app = express();
 app.use(express.json());
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
-  databaseURL:
-    "https://ginhawa-82218-default-rtdb.asia-southeast1.firebasedatabase.app",
 });
 
 app.post("/register-student", async (req, res) => {
